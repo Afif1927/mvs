@@ -5,8 +5,8 @@ import Home from "./components/Home";
 import AboutView from "./components/AboutView";
 import SearchView from "./components/SearchView";
 import MovieView from "./components/MovieView";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import ErrorPage from "./components/errorPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -25,13 +25,12 @@ function App() {
   }, [searchText]);
 
   return (
-    <div>
-      <BrowserRouter basename="/mvs"></BrowserRouter>
+    <BrowserRouter basename="/mvs">
       <Navbar searchText={searchText} setSearchText={setSearchText} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutView />} />
-        <Route path="/null" element={<errorPage />} />
+        <Route path="/null" element={<ErrorPage />} />
         <Route
           path="/search"
           element={
@@ -39,9 +38,9 @@ function App() {
           }
         />
         <Route path="/movies/:id" element={<MovieView />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<errorPage />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 }
 
